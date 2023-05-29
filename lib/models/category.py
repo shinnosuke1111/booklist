@@ -2,7 +2,7 @@
 
 class Category(db.Model):
 
-    __tablename__ = 'categories'
+    __tablename__ = 'sample_categories'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
