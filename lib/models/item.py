@@ -11,6 +11,7 @@ class Item(db.Model):
     category = db.relationship('Category', uselist=False)
     #order = db.relationship('Order', backref='item', uselist=False)
 
-    def __init__(self, category_id, name):
+    def __init__(self, category_id, name, stock):
         self.category_id = category_id
         self.name = name
+        self.stock = stock

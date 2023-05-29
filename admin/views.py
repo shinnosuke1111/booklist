@@ -72,7 +72,7 @@ def create():
   item = Item(
     name=request.form.get('name'),
     category_id=request.form.get('category_id'),
-    price=request.form.get('price'),
+    stock=request.form.get('stock'),
   )
   try:
     db.session.add(item)
@@ -80,7 +80,7 @@ def create():
   except: 
     flash('入力した値を再度確認してください', 'error')
     return redirect(url_for('new'))
-  flash('商品が作成されました', 'success')
+  flash('本が作成されました', 'success')
   return redirect(url_for('index'))
 
 # 商品更新画面を表示
@@ -98,14 +98,14 @@ def update(id):
   item = Item.query.get(id)
   item.name = request.form.get('name')
   item.category_id = request.form.get('category_id')
-  item.price = request.form.get('price')
+  item.stock = request.form.get('stock')
   try:
     db.session.merge(item)
     db.session.commit()
   except: 
     flash('入力した値を再度確認してください', 'danger')
     return redirect(url_for('new'))
-  flash('商品が更新されました', 'success')
+  flash('本が更新されました', 'success')
   return redirect(url_for('index'))
 
 # 商品削除処理
@@ -115,5 +115,5 @@ def delete(id):
   item = Item.query.get(id)
   db.session.delete(item)
   db.session.commit()
-  flash('商品が削除されました', 'success')
+  flash('本が削除されました', 'success')
   return redirect(url_for('index'))
