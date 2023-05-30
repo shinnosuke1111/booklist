@@ -72,7 +72,7 @@ def create():
   item = Item(
     name=request.form.get('name'),
     category_id=request.form.get('category_id'),
-    price=request.form.get('price'),
+    stock=request.form.get('stock'),
   )
   try:
     db.session.add(item)
@@ -98,7 +98,7 @@ def update(id):
   item = Item.query.get(id)
   item.name = request.form.get('name')
   item.category_id = request.form.get('category_id')
-  item.price = request.form.get('price')
+  item.stock = request.form.get('stock')
   try:
     db.session.merge(item)
     db.session.commit()
