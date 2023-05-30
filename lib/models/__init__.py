@@ -1,2 +1,2 @@
-from .category import Sample_categories
-from .item import Sample_items
+from .category import Categories
+from .item import Items

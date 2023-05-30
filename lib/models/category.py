@@ -1,6 +1,6 @@
 ﻿from lib.db import db
 
-class Sample_categories(db.Model):
+class Categories(db.Model):
 
     __tablename__ = 'sample_categories'
 

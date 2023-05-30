@@ -4,8 +4,8 @@ from flask import render_template, request, url_for, session, redirect, flash
 # 「__init__.py」で宣言した変数appを取得
 from admin import app
 
-# Sample_itemsモデルを取得
-from lib.models import Sample_categories, Sample_items
+# Itemsモデルを取得
+from lib.models import Categories, Items
 
 # SQLAlchemyを取得
 from lib.db import db
@@ -48,31 +48,31 @@ def logout():
 @app.route('/items')
 @login_check
 def index():
-  items = Sample_items.query.order_by(Sample_items.id.desc()).all()
+  items = Items.query.all()
   return render_template('items/index.html', items=items)
 
 # 商品詳細を表示
 @app.route('/items/<int:id>')
 @login_check
 def show(id):
-  item = Sample_items.query.get(id)
+  item = Items.query.get(id)
   return render_template('items/show.html', item=item)
 
 # 商品作成画面を表示
 @app.route('/items/new')
 @login_check
 def new():
-  categories = Sample_categories.query.all()
+  categories = Categories.query.all()
   return render_template('items/new.html', categories=categories)
 
 # 商品作成処理
 @app.route('/items/create', methods=['POST'])
 @login_check
 def create():
-  item = Sample_items(
+  item = Items(
     name=request.form.get('name'),
     category_id=request.form.get('category_id'),
-    price=request.form.get('price'),
+    stock=request.form.get('stock'),
   )
   try:
     db.session.add(item)
@@ -87,18 +87,18 @@ def create():
 @app.route('/<int:id>/edit')
 @login_check
 def edit(id):
-  item = Sample_items.query.get(id)
-  categories = Sample_categories.query.all()
+  item = Items.query.get(id)
+  categories = Categories.query.all()
   return render_template('items/edit.html', item=item, categories=categories)
 
 # 商品更新処理
 @app.route('/<int:id>/update', methods=['POST'])
 @login_check
 def update(id):
-  item = Sample_items.query.get(id)
+  item = Items.query.get(id)
   item.name = request.form.get('name')
   item.category_id = request.form.get('category_id')
-  item.price = request.form.get('price')
+  item.stock = request.form.get('stock')
   try:
     db.session.merge(item)
     db.session.commit()
@@ -112,7 +112,7 @@ def update(id):
 @app.route('/<int:id>/delete', methods=['POST'])
 @login_check
 def delete(id):
-  item = Sample_items.query.get(id)
+  item = Items.query.get(id)
   db.session.delete(item)
   db.session.commit()
   flash('商品が削除されました', 'success')

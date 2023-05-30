@@ -10,7 +10,7 @@
       <td>ID</td>
       <td>商品名</td>
       <td>分類</td>
-      <td>値段</td>
+      <td>在庫</td>
       <td colspan="3"><a href="{{url_for('new')}}">新規作成</a></td>
     </tr>
   </thead>
@@ -20,7 +20,7 @@
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.category.name }}</td>
-        <td>{{ item.price }}円</td>
+        <td>{{ item.stock }}</td>
         <td><a href="{{url_for('show', id=item.id)}}">詳細</a></td>
         <td><a href="{{url_for('edit', id=item.id)}}">編集</a></td>
         <td>

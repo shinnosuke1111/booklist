@@ -1,6 +1,6 @@
 ﻿from lib.db import db
 
-class Sample_items(db.Model):
+class Items(db.Model):
 
     __tablename__ = 'sample_items'
 
@@ -8,7 +8,7 @@ class Sample_items(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('sample_categories.id'))
     name = db.Column(db.String(64), nullable=False)
     stock = db.Column(db.Integer, nullable=False)
-    category = db.relationship('Category', uselist=False)
+    category = db.relationship('Categories', uselist=False)
     #order = db.relationship('Order', backref='item', uselist=False)
 
     def __init__(self, category_id, name, stock):
